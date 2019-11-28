@@ -10,16 +10,78 @@ package hundirlaflota;
  * @author alberto
  */
 public class Disparo {
-    
-    public void DisparoAle(){
-        
+
+    private boolean tocado = false;
+    private int to[] = new int[4];
+    private int PosX;
+    private int PosY;
+    private int intento = 0;
+    private String dir;
+
+    Disparo() {
+        for (int i = 0; i < 4; i++) {
+            to[i] = 0;
+        }
     }
-    
-    public void DisparoToc(){
-        
+
+    public void DisparoAle(Tablero P) {
+        //if (!tocado) {
+        boolean toc = true;
+        int posx;
+        int posy;
+        while (toc) {
+            posx = (int) (Math.random() * 10);
+            posy = (int) (Math.random() * 10);
+            if (P.casillas[posx][posy] == "~" || P.casillas[posx][posy] == "#") {
+                toc = false;
+                if (P.casillas[posx][posy] == "~") {
+                    P.casillas[posx][posy] = "*";
+                } else {
+                    P.casillas[posx][posy] = "@";
+                    tocado = true;
+                    PosX = posx;
+                    PosY = posy;
+                }
+            }
+        }
+        // } else {
+        //     DisparoToc(P);
+        // }
+
     }
-    
-    public void DisparoInt(){
-        
+
+    public void DisparoToc(Tablero P) {
+        if (intento == 3) {
+            if (to[0] == 0) {
+                if (P.casillas[PosX + 1][PosY] == "~") {
+                    P.casillas[PosX + 1][PosY] = "*";
+                    to[0] = 1;
+                } else if (P.casillas[PosX + 1][PosY] == "#") {
+                    P.casillas[PosX + 1][PosY] = "@";
+                    tocado = true;
+                    intento = 0;
+                }
+            } else if (to[1] == 0) {
+
+            } else if (to[2] == 0) {
+
+            } else if (to[3] == 0) {
+
+            }
+        }
+    }
+
+    public boolean DisparoInt(int Posx, int Posy, Tablero P) {
+        boolean toc = false;
+        if (P.casillas[Posx][Posy] == "~") {
+            toc = true;
+            P.casillas[Posx][Posy] = "*";
+        } else if (P.casillas[Posx][Posy] == "#") {
+            toc = true;
+            P.casillas[Posx][Posy] = "@";
+        } else {
+            System.out.println("Ya habias disparado en esta posición");
+        }
+        return toc;
     }
 }

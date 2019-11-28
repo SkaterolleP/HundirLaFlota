@@ -18,7 +18,7 @@ public class HundirLaFlota {
         // TODO code application logic here
         Jugador j1 = new Jugador("Alberto");
         
-        j1.show(j1.Jug);
+        j1.show();
     }
     
 }
