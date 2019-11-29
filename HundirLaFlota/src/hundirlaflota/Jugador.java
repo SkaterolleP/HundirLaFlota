@@ -6,6 +6,7 @@
 package hundirlaflota;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -26,6 +27,8 @@ public class Jugador {
         UbicarNaves(5, 5, 6, "Ab");
         di.DisparoInt(5, 5, Jug);
         di.DisparoAle(Jug);
+        //System.out.println("X-->"+BarcosAuto.get(1).getPosX()+"|| Y-->"+BarcosAuto.get(1).getPosY()+"|| Tam->"+BarcosAuto.get(1).getTamaño());
+        //System.out.println("X-->"+BarcosAuto.get(0).getPosX()+"|| Y-->"+BarcosAuto.get(0).getPosY()+"|| Tam->"+BarcosAuto.get(0).getTamaño());
     }
 
     public void show() {
@@ -97,9 +100,48 @@ public class Jugador {
         return dev;
     }
 
+    public void Jugar() {
+        int todos = 0;
+        while (todos < 1) {
+            Barco n = new Barco();
+            Scanner t = new Scanner(System.in);
+            boolean cor = false;
+            while (!cor) {
+                System.out.print("Introduzca la dirección del barco(D,I,Ar,Ab)= ");
+                String dire = t.next();
+                System.out.print("-----"+dire+"\n");
+                cor = true;
+                int d;
+                if (dire.equals("D")) {
+                    d = 0;
+                } else if (dire.equals("I")) {
+                    d = 1;
+                } else if (dire.equals("Ar")) {
+                    d = 2;
+                } else if (dire.equals("Ab")) {
+                    d = 3;
+                } else {
+                    System.out.println("No introdujo un valor permitido, vueva a meter la dirección");
+                    System.out.println("");
+                    cor = false;
+                }
+            }
+            if (todos == 0) {
+                n.setTamaño(5);
+            } else if (todos == 1 || todos == 2) {
+                n.setTamaño(4);
+            } else if (todos > 2 && todos < 6) {
+                n.setTamaño(3);
+            } else if (todos > 5) {
+                n.setTamaño(4);
+            }
+            boolean pue = false;
+        }
+    }
+
     private void Ubicar() {
         int todos = 0;
-        while (todos < 2) {
+        while (todos < 10) {
             Barco n = new Barco();
             int d = (int) (Math.random() * 4);
             if (todos == 0) {
@@ -111,111 +153,113 @@ public class Jugador {
             } else if (todos > 5) {
                 n.setTamaño(4);
             }
-            boolean sal = false;
-            boolean pue =false;
+            boolean pue = false;
             while (!pue) {
                 pue = true;
                 if (d == 0 && n.getTamaño() == 5) {
-                    n.setPosX((int) (Math.random() * 6));
-                    n.setPosY((int) (Math.random() * 10));
+                    n.setPosX((int) (Math.random() * 9) + 1);
+                    n.setPosY((int) (Math.random() * 5) + 1);
                 } else if (d == 0 && n.getTamaño() == 4) {
-                    n.setPosX((int) (Math.random() * 7));
-                    n.setPosY((int) (Math.random() * 10));
+                    n.setPosX((int) (Math.random() * 9) + 1);
+                    n.setPosY((int) (Math.random() * 6) + 1);
                 } else if (d == 0 && n.getTamaño() == 3) {
-                    n.setPosX((int) (Math.random() * 8));
-                    n.setPosY((int) (Math.random() * 10));
+                    n.setPosX((int) (Math.random() * 9) + 1);
+                    n.setPosY((int) (Math.random() * 7) + 1);
                 } else if (d == 0 && n.getTamaño() == 2) {
-                    n.setPosX((int) (Math.random() * 9));
-                    n.setPosY((int) (Math.random() * 10));
+                    n.setPosX((int) (Math.random() * 9) + 1);
+                    n.setPosY((int) (Math.random() * 8) + 1);
                 } else if (d == 1 && n.getTamaño() == 5) {
-                    n.setPosX((int) (n.getTamaño() + Math.random() * 6));
-                    n.setPosY((int) (Math.random() * 10));
+                    n.setPosX((int) (Math.random() * 9) + 1);
+                    n.setPosY((int) (n.getTamaño() + Math.random() * 5) + 1);
                 } else if (d == 1 && n.getTamaño() == 4) {
-                    n.setPosX((int) (n.getTamaño() + Math.random() * 7));
-                    n.setPosY((int) (Math.random() * 10));
+                    n.setPosX((int) (Math.random() * 9) + 1);
+                    n.setPosY((int) (n.getTamaño() + Math.random() * 6) + 1);
                 } else if (d == 1 && n.getTamaño() == 3) {
-                    n.setPosX((int) (n.getTamaño() + Math.random() * 8));
-                    n.setPosY((int) (Math.random() * 10));
+                    n.setPosX((int) (Math.random() * 9) + 1);
+                    n.setPosY((int) (n.getTamaño() + Math.random() * 7) + 1);
                 } else if (d == 1 && n.getTamaño() == 2) {
-                    n.setPosX((int) (n.getTamaño() + Math.random() * 9));
-                    n.setPosY((int) (Math.random() * 10));
+                    n.setPosX((int) (Math.random() * 9) + 1);
+                    n.setPosY((int) (n.getTamaño() + Math.random() * 8) + 1);
                 } else if (d == 2 && n.getTamaño() == 5) {
-                    n.setPosX((int) (Math.random() * 10));
-                    n.setPosY((int) (n.getTamaño() + Math.random() * 6));
+                    n.setPosX((int) (n.getTamaño() + Math.random() * 5) + 1);
+                    n.setPosY((int) (Math.random() * 9) + 1);
                 } else if (d == 2 && n.getTamaño() == 4) {
-                    n.setPosX((int) (Math.random() * 10));
-                    n.setPosY((int) (n.getTamaño() + Math.random() * 7));
+                    n.setPosX((int) (n.getTamaño() + Math.random() * 6) + 1);
+                    n.setPosY((int) (Math.random() * 9) + 1);
                 } else if (d == 2 && n.getTamaño() == 3) {
-                    n.setPosX((int) (Math.random() * 10));
-                    n.setPosY((int) (n.getTamaño() + Math.random() * 8));
+                    n.setPosX((int) (n.getTamaño() + Math.random() * 7) + 1);
+                    n.setPosY((int) (Math.random() * 9) + 1);
                 } else if (d == 2 && n.getTamaño() == 2) {
-                    n.setPosX((int) (Math.random() * 10));
-                    n.setPosY((int) (n.getTamaño() + Math.random() * 9));
-                }else if (d == 3 && n.getTamaño() == 5) {
-                    n.setPosX((int) (Math.random() * 10));
-                    n.setPosY((int) (Math.random() * 6));
+                    n.setPosX((int) (n.getTamaño() + Math.random() * 8) + 1);
+                    n.setPosY((int) (Math.random() * 9) + 1);
+                } else if (d == 3 && n.getTamaño() == 5) {
+                    n.setPosX((int) (Math.random() * 5) + 1);
+                    n.setPosY((int) (Math.random() * 9) + 1);
                 } else if (d == 3 && n.getTamaño() == 4) {
-                    n.setPosX((int) (Math.random() * 10));
-                    n.setPosY((int) (Math.random() * 7));
+                    n.setPosX((int) (Math.random() * 6) + 1);
+                    n.setPosY((int) (Math.random() * 9) + 1);
                 } else if (d == 3 && n.getTamaño() == 3) {
-                    n.setPosX((int) (Math.random() * 10));
-                    n.setPosY((int) (Math.random() * 8));
+                    n.setPosX((int) (Math.random() * 7) + 1);
+                    n.setPosY((int) (Math.random() * 9) + 1);
                 } else if (d == 3 && n.getTamaño() == 2) {
-                    n.setPosX((int) (Math.random() * 10));
-                    n.setPosY((int) (Math.random() * 9));
+                    n.setPosX((int) (Math.random() * 8) + 1);
+                    n.setPosY((int) (Math.random() * 9) + 1);
                 }
                 int di = 0;
                 if (d == 0) {
                     while (pue && di < n.getTamaño()) {
-                        if (Auto.casillas[n.getPosX() + di][n.getPosY()] == "#") {
+                        if (Auto.casillas[n.getPosX() - 1][n.getPosY() + di - 1] == "#") {
                             pue = false;
                         }
                         di++;
                     }
                 } else if (d == 1) {
                     while (pue && di < n.getTamaño()) {
-                        if (Auto.casillas[n.getPosX() - di][n.getPosY()] == "#") {
+                        if (Auto.casillas[n.getPosX() - 1][n.getPosY() - di - 1] == "#") {
                             pue = false;
                         }
                         di++;
                     }
                 } else if (d == 2) {
                     while (pue && di < n.getTamaño()) {
-                        if (Auto.casillas[n.getPosX()][n.getPosY() - di] == "#") {
+                        if (Auto.casillas[n.getPosX() - di - 1][n.getPosY() - 1] == "#") {
                             pue = false;
                         }
                         di++;
                     }
                 } else if (d == 3) {
                     while (pue && di < n.getTamaño()) {
-                        if (Auto.casillas[n.getPosX()][n.getPosY() + di] == "#") {
+                        if (Auto.casillas[n.getPosX() + di - 1][n.getPosY() - 1] == "#") {
                             pue = false;
                         }
                         di++;
                     }
                 }
             }
+            n.setD(d);
+            //System.out.println("X-->" + n.getPosX() + "|| Y-->" + n.getPosY() + "|| Tam->" + n.getTamaño() + "|| Dir-->" + n.getD());
+
             if (d == 0) {
-                for (int i = n.getPosY() - 1; i < n.getPosY(); i++) {
-                    for (int j = n.getPosX() - 1; j < n.getPosX() + n.getTamaño() - 1; j++) {
+                for (int i = n.getPosX() - 1; i < n.getPosX(); i++) {
+                    for (int j = n.getPosY() - 1; j < n.getPosY() + n.getTamaño() - 1; j++) {
                         Auto.casillas[i][j] = "#";
                     }
                 }
             } else if (d == 1) {
-                for (int i = n.getPosY() - 1; i < n.getPosY(); i++) {
-                    for (int j = n.getPosX() - n.getTamaño(); j < n.getPosX(); j++) {
+                for (int i = n.getPosX() - 1; i < n.getPosX() - 1; i++) {
+                    for (int j = n.getPosY() - n.getTamaño(); j < n.getPosY(); j++) {
                         Auto.casillas[i][j] = "#";
                     }
                 }
             } else if (d == 2) {
-                for (int i = n.getPosY() - n.getTamaño(); i < n.getPosY(); i++) {
-                    for (int j = n.getPosX(); j < n.getPosX() + 1; j++) {
+                for (int i = n.getPosX() - n.getTamaño(); i < n.getPosX(); i++) {
+                    for (int j = n.getPosY() - 1; j < n.getPosY(); j++) {
                         Auto.casillas[i][j] = "#";
                     }
                 }
             } else if (d == 3) {
-                for (int i = n.getPosY() - 1; i < n.getPosY() + n.getTamaño() - 1; i++) {
-                    for (int j = n.getPosX(); j < n.getPosX() + 1; j++) {
+                for (int i = n.getPosX() - 1; i < n.getPosX() + n.getTamaño() - 1; i++) {
+                    for (int j = n.getPosY() - 1; j < n.getPosY(); j++) {
                         Auto.casillas[i][j] = "#";
                     }
                 }

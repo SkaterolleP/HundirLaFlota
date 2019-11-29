@@ -24,7 +24,7 @@ public class Disparo {
         }
     }
 
-    public void DisparoAle(Tablero P) {
+    public int DisparoAle(Tablero P) {
         //if (!tocado) {
         boolean toc = true;
         int posx;
@@ -38,6 +38,8 @@ public class Disparo {
                     P.casillas[posx][posy] = "*";
                 } else {
                     P.casillas[posx][posy] = "@";
+                    P.setBarcosRes();
+                    P.setTirosReal();
                     tocado = true;
                     PosX = posx;
                     PosY = posy;
@@ -47,6 +49,7 @@ public class Disparo {
         // } else {
         //     DisparoToc(P);
         // }
+        return P.getBarcosRes();
 
     }
 
@@ -71,17 +74,16 @@ public class Disparo {
         }
     }
 
-    public boolean DisparoInt(int Posx, int Posy, Tablero P) {
-        boolean toc = false;
+    public int DisparoInt(int Posx, int Posy, Tablero P) {
         if (P.casillas[Posx][Posy] == "~") {
-            toc = true;
             P.casillas[Posx][Posy] = "*";
         } else if (P.casillas[Posx][Posy] == "#") {
-            toc = true;
             P.casillas[Posx][Posy] = "@";
+            P.setBarcosRes();
+            P.setTirosReal();
         } else {
             System.out.println("Ya habias disparado en esta posición");
         }
-        return toc;
+        return P.getBarcosRes();
     }
 }

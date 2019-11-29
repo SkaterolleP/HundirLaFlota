@@ -26,22 +26,22 @@ public class Tablero {
         }
         barco = bar;
         TirosReal = 0;
-        BarcosRes = 0;
+        BarcosRes = 30;
     }
 
     public int getTirosReal() {
         return TirosReal;
     }
 
-    public void setTirosReal(int TirosReal) {
-        this.TirosReal = TirosReal;
+    public void setTirosReal() {
+        this.TirosReal ++;
     }
 
     public int getBarcosRes() {
         return BarcosRes;
     }
 
-    public void setBarcosRes(int BarcosRes) {
-        this.BarcosRes = BarcosRes;
+    public void setBarcosRes() {
+        this.BarcosRes --;
     }
 }

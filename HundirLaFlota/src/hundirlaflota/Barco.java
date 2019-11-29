@@ -14,6 +14,7 @@ public class Barco {
     private boolean Hundido = false;
     private int PosX;
     private int PosY;
+    private int d;
 
     public int getTamaño() {
         return Tamaño;
@@ -45,5 +46,13 @@ public class Barco {
 
     public void setPosY(int PosY) {
         this.PosY = PosY;
+    }
+
+    public int getD() {
+        return d;
+    }
+
+    public void setD(int d) {
+        this.d = d;
     }
 }
