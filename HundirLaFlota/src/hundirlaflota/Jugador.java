@@ -23,10 +23,10 @@ public class Jugador {
 
     Jugador(String nom) {
         Nombre = nom;
-        Ubicar();
-        UbicarNaves(5, 5, 6, "Ab");
-        di.DisparoInt(5, 5, Jug);
-        di.DisparoAle(Jug);
+        //Ubicar();
+        //UbicarNaves(5, 5, 6, "Ab");
+        //di.DisparoInt(5, 5, Jug);
+        //di.DisparoAle(Jug);
         //System.out.println("X-->"+BarcosAuto.get(1).getPosX()+"|| Y-->"+BarcosAuto.get(1).getPosY()+"|| Tam->"+BarcosAuto.get(1).getTamaño());
         //System.out.println("X-->"+BarcosAuto.get(0).getPosX()+"|| Y-->"+BarcosAuto.get(0).getPosY()+"|| Tam->"+BarcosAuto.get(0).getTamaño());
     }
@@ -102,16 +102,18 @@ public class Jugador {
 
     public void Jugar() {
         int todos = 0;
-        while (todos < 1) {
-            Barco n = new Barco();
+        show();
             Scanner t = new Scanner(System.in);
+        while (todos < 2) {
+            Barco n = new Barco();
             boolean cor = false;
+            int d = 0;
             while (!cor) {
                 System.out.print("Introduzca la dirección del barco(D,I,Ar,Ab)= ");
                 String dire = t.next();
-                System.out.print("-----"+dire+"\n");
+                //System.out.print("----->" + dire + "\n");
                 cor = true;
-                int d;
+                //System.out.println(dire.equals("D"));
                 if (dire.equals("D")) {
                     d = 0;
                 } else if (dire.equals("I")) {
@@ -126,6 +128,7 @@ public class Jugador {
                     cor = false;
                 }
             }
+            n.setD(d);
             if (todos == 0) {
                 n.setTamaño(5);
             } else if (todos == 1 || todos == 2) {
@@ -136,6 +139,90 @@ public class Jugador {
                 n.setTamaño(4);
             }
             boolean pue = false;
+            while (!pue) {
+                pue = true;
+                System.out.println("Barco de tamaño: "+n.getTamaño());
+                System.out.println("La X y la Y están invertidas");
+                System.out.print("Introduzca la dirección X: ");
+                n.setPosX(t.nextInt());
+                System.out.print("Introduzca la posición Y:");
+                n.setPosY(t.nextInt());
+                int di = 0;
+                if (d == 0) {
+                    while (pue && di < n.getTamaño()) {
+                        if (Jug.casillas[n.getPosX() - 1][n.getPosY() + di - 1] == "#") {
+                            pue = false;
+                            System.out.println("No introdujo unas cordenadas validas");
+                        }
+                        di++;
+                    }
+                } else if (d == 1) {
+                    while (pue && di < n.getTamaño()) {
+                        if (Jug.casillas[n.getPosX() - 1][n.getPosY() - di - 1] == "#") {
+                            pue = false;
+                            System.out.println("No introdujo unas cordenadas validas");
+                        }
+                        di++;
+                    }
+                } else if (d == 2) {
+                    while (pue && di < n.getTamaño()) {
+                        if (Jug.casillas[n.getPosX() - di - 1][n.getPosY() - 1] == "#") {
+                            pue = false;
+                            System.out.println("No introdujo unas cordenadas validas");
+                        }
+                        di++;
+                    }
+                } else if (d == 3) {
+                    while (pue && di < n.getTamaño()) {
+                        if (Jug.casillas[n.getPosX() + di - 1][n.getPosY() - 1] == "#") {
+                            pue = false;
+                            System.out.println("No introdujo unas cordenadas validas");
+                        }
+                        di++;
+                    }
+                } 
+            }
+            if (n.getD() == 0) {
+                for (int i = n.getPosX() - 1; i < n.getPosX(); i++) {
+                    for (int j = n.getPosY() - 1; j < n.getPosY() + n.getTamaño() - 1; j++) {
+                        Jug.casillas[i][j] = "#";
+                    }
+                }
+            } else if (n.getD() == 1) {
+                for (int i = n.getPosX() - 1; i < n.getPosX() - 1; i++) {
+                    for (int j = n.getPosY() - n.getTamaño(); j < n.getPosY(); j++) {
+                        Jug.casillas[i][j] = "#";
+                    }
+                }
+            } else if (n.getD() == 2) {
+                for (int i = n.getPosX() - n.getTamaño(); i < n.getPosX(); i++) {
+                    for (int j = n.getPosY() - 1; j < n.getPosY(); j++) {
+                        Jug.casillas[i][j] = "#";
+                    }
+                }
+            } else if (n.getD() == 3) {
+                for (int i = n.getPosX() - 1; i < n.getPosX() + n.getTamaño() - 1; i++) {
+                    for (int j = n.getPosY() - 1; j < n.getPosY(); j++) {
+                        Jug.casillas[i][j] = "#";
+                    }
+                }
+            }
+            todos++;
+            Barcos.add(n);
+            show();
+        }
+        Ubicar();
+        show();
+        Disparo disp = new Disparo();
+        while(Jug.getBarcosRes()!=0 || Auto.getBarcosRes()!=0){
+            System.out.println("Donde disparar: ");
+            System.out.print("X--> ");
+            int x = t.nextInt();
+            System.out.print("Y--> ");
+            int y = t.nextInt();
+            disp.DisparoInt(x-1, y-1, Auto);
+            disp.DisparoAle(Jug);
+            show();
         }
     }
 
